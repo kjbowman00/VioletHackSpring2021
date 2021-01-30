@@ -1,0 +1,9 @@
+{
+  "name": "violet-hack-spring2021",
+  "version": "0.0.0",
+  "description": "VioletHackSpring2021",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  }
+}
