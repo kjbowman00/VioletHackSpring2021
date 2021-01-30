@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
         if (p != undefined) {
             players.delete(socket.id);
             console.log(p.name + " has left the game!");
+            socket.broadcast.emit("player_left", socket.id);
         }
     });
 
@@ -40,6 +41,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('update_pos', (position) => {
+        let p = players.get(socket.id);
+        if (p != undefined) {
+            p.position = position;
+            socket.broadcast.emit("player_pos", { id: socket.id, player: p });
+        }
     });
 
     socket.on('chat_send', (message) => {
