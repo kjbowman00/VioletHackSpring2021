@@ -5,13 +5,12 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 var path = require('path');
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Player stuff
 //EX player: {position: {x: 12, room: 1}, name: "Bob", avatar: 3}
 var players = new Map();
 
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', (socket) => {
     console.log('a user connected');
