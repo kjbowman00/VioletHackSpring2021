@@ -5,9 +5,7 @@
 </head>
 <body>
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-  var socket = io();
-	</script>
+	<script src="/communicator.js"></script>
 
 
 
@@ -26,7 +24,7 @@
 		<p1>Pick your avatar</p1>
 		<br>
 		<br>
-		<button>Play</button>
+		<button onclick="joinGame()"> Play</button>
 	</div>
 
 	<div id="game_box">
