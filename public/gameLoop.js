@@ -14,11 +14,16 @@ var backgroundImage = new Image(800, 400);
 backgroundImage.src = "/backgrounds/background1.png";
 
 function update() {
+	let playerSpeed = 500;
+	player.x += getDirectionMultiplier() * deltaTime * playerSpeed;
 }
 
 function draw() {
 	var ctx = canvas.getContext('2d');
 	ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 0, 0, canvas.width, canvas.height);
+
+	ctx.fillStyle = "black";
+	ctx.fillRect(player.x, canvas.height - 150, 100, 100);
 }
 
 function gameLoop(timestamp) {
@@ -28,6 +33,3 @@ function gameLoop(timestamp) {
 	draw();
 	requestAnimationFrame(gameLoop);
 }
-
-
-requestAnimationFrame(gameLoop);
