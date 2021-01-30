@@ -1,0 +1,11 @@
+#game_box {
+	position: absolute;
+	display: none;
+	top: 0px;
+	left: 0px;
+}
+	#game_box canvas {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}

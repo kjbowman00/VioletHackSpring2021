@@ -1,7 +1,9 @@
 'use strict';
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+var path = require('path');
 
 
 //Player stuff
@@ -9,10 +11,7 @@ const io = require('socket.io')(http);
 var players = new Map();
 
 
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', (socket) => {
     console.log('a user connected');
