@@ -1,8 +1,19 @@
 'use strict';
-var http = require('http');
-var port = process.env.PORT || 1337;
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
+http.listen(3000, () => {
+    console.log('listening on *:3000');
+});
