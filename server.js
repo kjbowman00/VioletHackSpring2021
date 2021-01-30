@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('join', (info) => {
+        let previousP = players.get(socket.id);
+        if (previousP != undefined) {
+
+        }
         console.log(info.name + " has joined the game as avatar " + info.avatar);
 
         let p = {
