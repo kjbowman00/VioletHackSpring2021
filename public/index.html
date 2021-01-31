@@ -4,11 +4,21 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<audio id="music" autoplay="autoplay">
-		<source src="/backgroundmusic.mp3" type="audio/mp3">
-	</audio>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+	<script>
+		var isMusicPlaying = true;
+		var sound = new Howl({
+  src: ['backgroundmusic.mp3'],
+  autoplay: true,
+  loop: true,
+  volume: 0.5,
+  onend: function() {
+    console.log('Finished!');
+  }
+});
+	</script>
 	
-	<img src="mute.png" width="50" height="50" onclick="document.getElementById('music').pause()" />
+	<button onclick="sound.mute(!isMusicPlaying); isMusicPlaying = !isMusicPlaying;"><img src="mute.png" width="50" height="50" /></button>
 
 
 	<script src="/socket.io/socket.io.js"></script>
