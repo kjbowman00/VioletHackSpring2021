@@ -56,7 +56,7 @@ function update() {
 	player.position.x += getDirectionMultiplier() * deltaTime * playerSpeed;
 	if (getDirectionMultiplier() != 0) {
 		lastFrameChange += deltaTime;
-		console.log(deltaTime);
+		//console.log(deltaTime);
 		if (lastFrameChange >= frameTimer) {
 			player.frame += 1;
 			if (player.frame == 3) player.frame = 1;
@@ -111,31 +111,39 @@ function drawParagraphText(ctx, message, x, y, width) {
 
 function draw() {
 	var ctx = canvas.getContext('2d');
-	ctx.imageSmoothingEnabled = false;
-	ctx.drawImage(backgroundImage, player.position.x - canvas.width / 2 / scale, 0, canvas.width / scale, backgroundImage.height,
-		0, 0, canvas.width, canvas.height);
+	// ctx.imageSmoothingEnabled = false;
+	// //ctx.drawImage(backgroundImage, player.position.x - canvas.width / 2 / scale, 0, canvas.width / scale, backgroundImage.height,
+	// //	0, 0, canvas.width, canvas.height);
 
-	if (player.position.x + canvas.width / 2 / scale < canvas.width / scale) {
-		ctx.drawImage(backgroundImage,
-			backgroundImage.width - (canvas.width / scale - player.position.x - canvas.width / 2 / scale), 0, canvas.width / scale - player.position.x - canvas.width / 2 / scale, backgroundImage.height,
-			0, 0, (canvas.width / scale - player.position.x - canvas.width / 2 / scale) * scale, canvas.height);
-	}
-	if (player.position.x > backgroundImage.width - canvas.width / scale) {
-		ctx.drawImage(backgroundImage,
-			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
-			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
-	}
+	// if (player.position.x + canvas.width / 2 / scale < canvas.width / scale) {
+	// 	ctx.drawImage(backgroundImage,
+	// 		backgroundImage.width - (canvas.width / scale - player.position.x - canvas.width / 2 / scale), 0, canvas.width / scale - player.position.x - canvas.width / 2 / scale, backgroundImage.height,
+	// 		0, 0, (canvas.width / scale - player.position.x - canvas.width / 2 / scale) * scale, canvas.height);
+	// }
+	// if (player.position.x > backgroundImage.width - canvas.width / scale) {
+	// 	ctx.drawImage(backgroundImage,
+	// 		0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
+	// 		canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
+	// }
 
-	for (let i = selfChatMessages.length - 1; i >= 0; i--) {
-		let textBoxWidth = 400;
-		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-		ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
-		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
-	}
+	// for (let i = selfChatMessages.length - 1; i >= 0; i--) {
+	// 	let textBoxWidth = 400;
+	// 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+	// 	ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+	// 	drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
+	// }
 
+	if (playerDirection == 1){
+		//ctx.translate(150, 0);
+		ctx.scale(-1,1);
+		ctx.translate(150, 0);
+	}
+	
 	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
-	// klaras attempt :(
-	//ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 50, canvas.height - 230, 100, 200);
+	//ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, 100, canvas.height - 180, 75, 150);
+
+	ctx.resetTransform();	
+
 
 	let maxTextWidth = player.name.length * 20;
 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
