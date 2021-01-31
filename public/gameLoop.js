@@ -11,20 +11,35 @@ var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
 var player = { position: { x: 3, room: 1 }, avatar: 1};
-var backgroundImage = new Image(800, 400);
-backgroundImage.src = "/backgrounds/background1.png";
+var backgroundImage = new Image(2705, 200);
+backgroundImage.src = "/backgrounds/background.png";
+var scale = canvas.height / backgroundImage.height;
 
 function update() {
-	let playerSpeed = 500;
+	let playerSpeed = 100;
 	player.position.x += getDirectionMultiplier() * deltaTime * playerSpeed;
+	if (player.position.x < 0) player.position.x += backgroundImage.width;
+	if (player.position.x > backgroundImage.width) player.position.x -= backgroundImage.width;
 }
 
 function draw() {
 	var ctx = canvas.getContext('2d');
-	ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 0, 0, canvas.width, canvas.height);
+	ctx.drawImage(backgroundImage, player.position.x - canvas.width / 2 / scale, 0, canvas.width / scale, backgroundImage.height,
+		0, 0, canvas.width, canvas.height);
+
+	if (player.position.x + canvas.width / 2 / scale < canvas.width / scale) {
+		ctx.drawImage(backgroundImage,
+			backgroundImage.width - (canvas.width / scale - player.position.x - canvas.width / 2 / scale), 0, canvas.width / scale - player.position.x - canvas.width / 2 / scale, backgroundImage.height,
+			0, 0, (canvas.width / scale - player.position.x - canvas.width / 2 / scale) * scale, canvas.height);
+	}
+	if (player.position.x > backgroundImage.width - canvas.width / scale) {
+		ctx.drawImage(backgroundImage,
+			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
+			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
+	}
 
 	ctx.fillStyle = "black";
-	ctx.fillRect(player.position.x, canvas.height - 150, 100, 100);
+	ctx.fillRect(canvas.width/2-50, canvas.height - 150, 100, 100);
 
 	for (const element of otherPlayers) {
 		let p = element[1];
