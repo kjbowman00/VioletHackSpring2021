@@ -10,7 +10,7 @@ var lastUpdateTime = 0;
 var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
-var player = { position: { x: 3, room: 1 }, avatarNum: 1, frame: 1, name:"eee"};
+var player = { position: { x: 3, room: 1 }, avatarNum: 1, frame: 1, name: "eee" };
 var backgroundImage = new Image(2705, 200);
 
 var playerImages = [];
@@ -122,27 +122,24 @@ function draw() {
 	}
 	if (player.position.x > backgroundImage.width - canvas.width / scale) {
 		ctx.drawImage(backgroundImage,
-			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
-			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
+			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale, backgroundImage.height,
+			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, canvas.height);
 	}
 
 	for (let i = selfChatMessages.length - 1; i >= 0; i--) {
 		let textBoxWidth = 400;
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
-		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
+		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth / 2, canvas.height - 300, textBoxWidth);
 	}
 
-	if (playerDirection == 1){
-		//ctx.translate(150, 0);
-		ctx.scale(-1,1);
-		ctx.translate(150, 0);
+	ctx.save();
+	if (playerDirection == 1) {
+		ctx.translate(75, 0);
+		ctx.scale(-1, 1);
 	}
-	
-	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
-	//ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, 100, canvas.height - 180, 75, 150);
-
-	ctx.resetTransform();	
+	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, (canvas.width / 2 - 75) * playerDirection * -1, canvas.height - 180, 75, 150);
+	ctx.restore();
 
 
 	let maxTextWidth = player.name.length * 20;
@@ -162,7 +159,7 @@ function draw() {
 	for (const element of otherPlayers) {
 		let p = element[1];
 		maxTextWidth = p.name.length * 20;
-		ctx.drawImage(playerImages[p.avatarNum - 1][p.frame-1], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x) * scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][p.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x) * scale, canvas.height - 180, 75, 150);
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
@@ -193,7 +190,7 @@ function draw() {
 			let textBoxWidth = 400;
 			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 			ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
-			drawParagraphText(ctx, chatMessages[i].message, canvas.width / 2 - (player.position.x - p.position.x) * scale - textBoxWidth / 2 , canvas.height - 300, textBoxWidth);
+			drawParagraphText(ctx, chatMessages[i].message, canvas.width / 2 - (player.position.x - p.position.x) * scale - textBoxWidth / 2, canvas.height - 300, textBoxWidth);
 
 			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 			ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
