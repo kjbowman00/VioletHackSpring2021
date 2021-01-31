@@ -45,6 +45,7 @@ function sendChat() {
 var chatMessages = [];
 socket.on("chat_message", (obj) => {
 	//Create text box above that particular player
+	console.log("YEET");
 	chatMessages.push({id: obj.id, message:obj.message, timeLeft: 5});
 });
 

@@ -155,6 +155,24 @@ function draw() {
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 200);
 	}
+
+	for (let i = chatMessages.length - 1; i >= 0; i--) {
+		let p = otherPlayers.get(chatMessages[i].id);
+		if (p != undefined) {
+			let textBoxWidth = 400;
+			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+			ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+			drawParagraphText(ctx, chatMessages[i].message, canvas.width / 2 - (player.position.x - p.position.x) * scale - textBoxWidth / 2 , canvas.height - 300, textBoxWidth);
+
+			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+			ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+			drawParagraphText(ctx, chatMessages[i].message, canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - textBoxWidth / 2, canvas.height - 300, textBoxWidth);
+
+			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+			ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+			drawParagraphText(ctx, chatMessages[i].message, canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale - textBoxWidth / 2, canvas.height - 300, textBoxWidth);
+		}
+	}
 }
 function gameLoop(timestamp) {
 	deltaTime = (timestamp - lastUpdateTime) / 1000;

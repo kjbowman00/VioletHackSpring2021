@@ -49,8 +49,9 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('chat_send', (message) => {
+    socket.on('chat_message', (message) => {
         console.log(message);
+        socket.broadcast.emit("chat_message", { id: socket.id, message: message });
     });
 });
 
