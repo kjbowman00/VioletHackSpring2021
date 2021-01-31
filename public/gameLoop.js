@@ -145,7 +145,7 @@ function draw() {
 	for (const element of otherPlayers) {
 		let p = element[1];
 		maxTextWidth = p.name.length * 20;
-		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x) * scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][p.frame-1], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x) * scale, canvas.height - 180, 75, 150);
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
@@ -153,7 +153,7 @@ function draw() {
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x) * scale, canvas.height - 200);
 
-		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][p.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 180, 75, 150);
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
@@ -161,7 +161,7 @@ function draw() {
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 200);
 
-		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][p.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 180, 75, 150);
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
@@ -193,7 +193,7 @@ function gameLoop(timestamp) {
 	lastUpdateTime = timestamp;
 	timeSinceLastSendUpdate += deltaTime;
 	if (timeSinceLastSendUpdate > 0.05) {
-		sendUpdates(player.position);
+		sendUpdates(player);
 		timeSinceLastSendUpdate = 0;
 	}
 	update();

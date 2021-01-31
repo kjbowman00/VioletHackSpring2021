@@ -16,8 +16,8 @@ function joinGame() {
 	socket.emit("join", { name: name, avatarNum: avatarNum, frame:1 });
 }
 
-function sendUpdates(position) {
-	socket.emit("update_pos", position);
+function sendUpdates(obj) {
+	socket.emit("update_pos", obj);
 }
 
 socket.on("player_pos", (obj) => {
@@ -27,6 +27,7 @@ socket.on("player_pos", (obj) => {
 	}
 	else {
 		p.position = obj.player.position;
+		p.frame = obj.player.frame;
 	}
 });
 socket.on("player_left", (obj) => {

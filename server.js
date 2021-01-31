@@ -41,10 +41,11 @@ io.on('connection', (socket) => {
         players.set(socket.id, p);
     });
 
-    socket.on('update_pos', (position) => {
+    socket.on('update_pos', (obj) => {
         let p = players.get(socket.id);
         if (p != undefined) {
-            p.position = position;
+            p.position = obj.position;
+            p.frame = obj.frame;
             socket.broadcast.emit("player_pos", { id: socket.id, player: p });
         }
     });
