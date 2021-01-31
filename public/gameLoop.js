@@ -115,31 +115,34 @@ function draw() {
 	ctx.drawImage(backgroundImage, player.position.x - canvas.width / 2 / scale, 0, canvas.width / scale, backgroundImage.height,
 		0, 0, canvas.width, canvas.height);
 
-	 if (player.position.x + canvas.width / 2 / scale < canvas.width / scale) {
-	 	ctx.drawImage(backgroundImage,
-	 		backgroundImage.width - (canvas.width / scale - player.position.x - canvas.width / 2 / scale), 0, canvas.width / scale - player.position.x - canvas.width / 2 / scale, backgroundImage.height,
-	 		0, 0, (canvas.width / scale - player.position.x - canvas.width / 2 / scale) * scale, canvas.height);
-	 }
-	 if (player.position.x > backgroundImage.width - canvas.width / scale) {
-	 	ctx.drawImage(backgroundImage,
-	 		0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
-	 		canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
-	 }
-
-	 for (let i = selfChatMessages.length - 1; i >= 0; i--) {
-	 	let textBoxWidth = 400;
-	 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-	 	ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
-	 	drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
-	 }
-
-	ctx.save();
-	if (playerDirection == 1){
-		ctx.translate(75, 0);
-		ctx.scale(-1,1);
+	if (player.position.x + canvas.width / 2 / scale < canvas.width / scale) {
+		ctx.drawImage(backgroundImage,
+			backgroundImage.width - (canvas.width / scale - player.position.x - canvas.width / 2 / scale), 0, canvas.width / scale - player.position.x - canvas.width / 2 / scale, backgroundImage.height,
+			0, 0, (canvas.width / scale - player.position.x - canvas.width / 2 / scale) * scale, canvas.height);
 	}
-	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, (canvas.width / 2 - 75) * playerDirection*-1, canvas.height - 180, 75, 150);
-	ctx.restore();	
+	if (player.position.x > backgroundImage.width - canvas.width / scale) {
+		ctx.drawImage(backgroundImage,
+			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
+			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
+	}
+
+	for (let i = selfChatMessages.length - 1; i >= 0; i--) {
+		let textBoxWidth = 400;
+		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
+	}
+
+	if (playerDirection == 1){
+		//ctx.translate(150, 0);
+		ctx.scale(-1,1);
+		ctx.translate(150, 0);
+	}
+	
+	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
+	//ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, 100, canvas.height - 180, 75, 150);
+
+	ctx.resetTransform();	
 
 
 	let maxTextWidth = player.name.length * 20;

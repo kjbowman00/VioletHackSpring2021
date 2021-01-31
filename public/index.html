@@ -4,6 +4,13 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<audio id="music" autoplay="autoplay">
+		<source src="backgroundmusic.mp3" type="audio/mp3">
+	</audio>
+	
+	<img src="mute.png" width="50" height="50" onclick="document.getElementById('music').pause()" />
+
+
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/communicator.js"></script>
 
