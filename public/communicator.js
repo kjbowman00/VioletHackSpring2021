@@ -33,6 +33,19 @@ socket.on("player_left", (obj) => {
 	otherPlayers.delete(obj);
 });
 
+var selfChatMessages = [];
+function sendChat(message) {
+	socket.emit("chat_message", message);
+	selfChatMessages.push({ message:message, timeLeft: 5 });
+}
+
+
+var chatMessages = [];
+socket.on("chat_message", (obj) => {
+	//Create text box above that particular player
+	chatMessages.push({id: obj.id, message:obj.message, timeLeft: 5});
+});
+
 function getPlayers() {
 
 }

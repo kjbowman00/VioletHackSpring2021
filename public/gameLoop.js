@@ -54,6 +54,45 @@ function update() {
 	player.position.x += getDirectionMultiplier() * deltaTime * playerSpeed;
 	if (player.position.x < 0) player.position.x += backgroundImage.width;
 	if (player.position.x > backgroundImage.width) player.position.x -= backgroundImage.width;
+
+	for (let i = selfChatMessages.length - 1; i >= 0; i--) {
+		let element = selfChatMessages[i];
+		element.timeLeft -= deltaTime;
+		if (element.timeLeft <= 0) {
+			selfChatMessages.splice(i, 1); //Remove element
+		}
+	}
+	for (let i = chatMessages.length - 1; i >= 0; i--) {
+		let element = chatMessages[i];
+		element.timeLeft -= deltaTime;
+		if (element.timeLeft <= 0) {
+			chatMessages.splice(i, 1); //Remove element
+		}
+	}
+}
+
+//Function for wrapping the paragraph comes from NISHIO Hirokazu on codepen
+function drawParagraphText(ctx, message, x, y, width) {
+	ctx.textAlign = "left";
+	ctx.font = "15px Georgia";
+	ctx.fillStyle = "black";
+	let words = message.split(' ');
+	let currLine = '';
+
+	for (let i = 0; i < words.length; i++) {
+		let nextLine = currLine + words[i] + ' ';
+		let metrics = ctx.measureText(nextLine);
+		let testWidth = metrics.width;
+		if (testWidth > width && i > 0) {
+			ctx.fillText(currLine, x, y);
+			currLine = words[i] + ' ';
+			y += 15;
+		}
+		else {
+			currLine = nextLine;
+		}
+		ctx.fillText(currLine, x, y);
+	}
 }
 
 function draw() {
@@ -71,6 +110,13 @@ function draw() {
 		ctx.drawImage(backgroundImage,
 			0, 0, player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width/2/scale,backgroundImage.height,
 			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
+	}
+
+	for (let i = selfChatMessages.length - 1; i >= 0; i--) {
+		let textBoxWidth = 400;
+		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		ctx.fillRect(canvas.width / 2 - textBoxWidth / 2 - 10, canvas.height - 300 - 25, textBoxWidth, 100);
+		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
 	}
 
 	ctx.drawImage(playerImages[avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
