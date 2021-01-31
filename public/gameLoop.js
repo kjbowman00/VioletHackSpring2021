@@ -88,7 +88,7 @@ function update() {
 //Function for wrapping the paragraph comes from NISHIO Hirokazu on codepen
 function drawParagraphText(ctx, message, x, y, width) {
 	ctx.textAlign = "left";
-	ctx.font = "15px Georgia";
+	ctx.font = "bold 15px Courier New";
 	ctx.fillStyle = "black";
 	let words = message.split(' ');
 	let currLine = '';
@@ -134,13 +134,22 @@ function draw() {
 	}
 
 	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
+	// klaras attempt :(
+	//ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 50, canvas.height - 230, 100, 200);
+
 	let maxTextWidth = player.name.length * 20;
 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+	//ctx.fillRect(canvas.width / 2 - 37.5 - maxTextWidth / 2, canvas.height - 275, maxTextWidth, 22);
 	ctx.fillRect(canvas.width / 2 - 37.5 - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
+	// klaras attempt :(
+	//ctx.fillRect(canvas.width / 2 - maxTextWidth / 2 + 2, canvas.height - 275, maxTextWidth, 22);
+
 	ctx.fillStyle = "black";
-	ctx.font = "20px Georgia";
+	ctx.font = "20px Courier New";
 	ctx.textAlign = "center";
 	ctx.fillText(player.name, canvas.width / 2 - 37.5, canvas.height - 200);
+	// klaras attempt :(
+	//ctx.fillText(player.name, canvas.width/ 2 + 2, canvas.height - 258);
 
 	for (const element of otherPlayers) {
 		let p = element[1];
@@ -149,7 +158,7 @@ function draw() {
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
-		ctx.font = "20px Georgia";
+		ctx.font = "20px Courier New";
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x) * scale, canvas.height - 200);
 
@@ -157,7 +166,7 @@ function draw() {
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
-		ctx.font = "20px Georgia";
+		ctx.font = "20px Courier New";
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 200);
 
@@ -165,7 +174,7 @@ function draw() {
 		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
 		ctx.fillStyle = "black";
-		ctx.font = "20px Georgia";
+		ctx.font = "20px Courier New";
 		ctx.textAlign = "center";
 		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 200);
 	}
