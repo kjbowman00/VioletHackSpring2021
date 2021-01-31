@@ -49,9 +49,23 @@ playerImages.push([img1, img2]);
 backgroundImage.src = "/backgrounds/background.png";
 var scale = canvas.height / backgroundImage.height;
 
+const frameTimer = 0.25;
+var lastFrameChange = 0;
 function update() {
 	let playerSpeed = 100;
 	player.position.x += getDirectionMultiplier() * deltaTime * playerSpeed;
+	if (getDirectionMultiplier() != 0) {
+		lastFrameChange += deltaTime;
+		console.log(deltaTime);
+		if (lastFrameChange >= frameTimer) {
+			player.frame += 1;
+			if (player.frame == 3) player.frame = 1;
+			lastFrameChange = 0;
+		}
+	}
+	else {
+		lastFrameChange = 0;
+	}
 	if (player.position.x < 0) player.position.x += backgroundImage.width;
 	if (player.position.x > backgroundImage.width) player.position.x -= backgroundImage.width;
 
@@ -119,7 +133,7 @@ function draw() {
 		drawParagraphText(ctx, selfChatMessages[i].message, canvas.width / 2 - textBoxWidth/2, canvas.height - 300, textBoxWidth);
 	}
 
-	ctx.drawImage(playerImages[avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
+	ctx.drawImage(playerImages[avatarNum - 1][player.frame - 1], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
 	let maxTextWidth = player.name.length * 20;
 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 	ctx.fillRect(canvas.width / 2 - 37.5 - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
