@@ -14,5 +14,5 @@ function changeAvatar(dir){
             avatarNum = 1;
         }
     }
-    document.getElementById("avatar").src = "/Avatars/avatar"+avatarNum+".png";
+    document.getElementById("avatar").src = "/Avatars/avatar"+avatarNum+"_1.png";
 }
