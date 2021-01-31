@@ -29,12 +29,13 @@ io.on('connection', (socket) => {
         if (previousP != undefined) {
 
         }
-        console.log(info.name + " has joined the game as avatar " + info.avatar);
+        console.log(info.name + " has joined the game as avatar " + info.avatarNum);
 
         let p = {
             position: { x: 5, room: 1 },
             name: info.name,
-            avatar: info.avatar
+            avatarNum: info.avatarNum,
+            frame: info.frame
         };
 
         players.set(socket.id, p);

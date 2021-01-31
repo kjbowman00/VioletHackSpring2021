@@ -10,7 +10,7 @@ var lastUpdateTime = 0;
 var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
-var player = { position: { x: 3, room: 1 }, avatar: 1, frame: 1};
+var player = { position: { x: 3, room: 1 }, avatarNum: 1, frame: 1};
 var backgroundImage = new Image(2705, 200);
 
 var playerImages = [];
@@ -77,8 +77,9 @@ function draw() {
 
 	for (const element of otherPlayers) {
 		let p = element[1];
-		ctx.fillStyle = "black";
-		ctx.fillRect(p.position.x, canvas.height - 150, 100, 100);
+		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width/2-50 - (player.position.x-p.position.x)*scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 180, 75, 150);
+		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 180, 75, 150);
 	}
 }
 function gameLoop(timestamp) {
