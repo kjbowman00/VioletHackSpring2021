@@ -11,8 +11,9 @@
 	}
 
 	#main_menu_box{
+		font-family: "Lucida Console", "Courier New", monospace;
 		text-align: center;
-		height: 700px;
+		height: 800px;
  		position: relative;
 		  /* border: 3px solid green; */
 	}

@@ -11,7 +11,7 @@ var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
 var player = { position: { x: 3, room: 1 }, avatar: 1};
-var backgroundImage = new Image(800, 400);
+var backgroundImage = new Image(115, 50);
 backgroundImage.src = "/backgrounds/background1.png";
 
 function update() {
@@ -21,6 +21,7 @@ function update() {
 
 function draw() {
 	var ctx = canvas.getContext('2d');
+	ctx.imageSmoothingEnabled = false;
 	ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, 0, 0, canvas.width, canvas.height);
 
 	ctx.fillStyle = "black";
