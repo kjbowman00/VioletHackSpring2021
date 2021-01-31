@@ -10,8 +10,42 @@ var lastUpdateTime = 0;
 var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
-var player = { position: { x: 3, room: 1 }, avatar: 1};
+var player = { position: { x: 3, room: 1 }, avatar: 1, frame: 1};
 var backgroundImage = new Image(2705, 200);
+
+var playerImages = [];
+let img1 = new Image(150, 300);
+let img2 = new Image(150, 300);
+img1.src = "Avatars/avatar1_1.png";
+img2.src = "Avatars/avatar1_2.png";
+playerImages.push([img1, img2]);
+img1 = new Image(150, 300);
+img2 = new Image(150, 300);
+img1.src = "Avatars/avatar2_1.png";
+img2.src = "Avatars/avatar2_2.png";
+playerImages.push([img1, img2]);
+img1 = new Image(150, 300);
+img2 = new Image(150, 300);
+img1.src = "Avatars/avatar3_1.png";
+img2.src = "Avatars/avatar3_2.png";
+playerImages.push([img1, img2]);
+img1 = new Image(150, 300);
+img2 = new Image(150, 300);
+img1.src = "Avatars/avatar4_1.png";
+img2.src = "Avatars/avatar4_2.png";
+playerImages.push([img1, img2]);
+img1 = new Image(150, 300);
+img2 = new Image(150, 300);
+img1.src = "Avatars/avatar5_1.png";
+img2.src = "Avatars/avatar5_2.png";
+playerImages.push([img1, img2]);
+img1 = new Image(150, 300);
+img2 = new Image(150, 300);
+img1.src = "Avatars/avatar6_1.png";
+img2.src = "Avatars/avatar6_2.png";
+playerImages.push([img1, img2]);
+
+
 backgroundImage.src = "/backgrounds/background.png";
 var scale = canvas.height / backgroundImage.height;
 
@@ -38,8 +72,7 @@ function draw() {
 			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
 	}
 
-	ctx.fillStyle = "black";
-	ctx.fillRect(canvas.width/2-50, canvas.height - 150, 100, 100);
+	ctx.drawImage(playerImages[avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50, canvas.height - 180, 75, 150);
 
 	for (const element of otherPlayers) {
 		let p = element[1];
