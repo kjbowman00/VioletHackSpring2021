@@ -9,7 +9,9 @@ function joinGame() {
 
 	requestAnimationFrame(gameLoop);
 
-	socket.emit("join", { name: "bob", avatar: avatarNum });
+	let name = document.getElementById("username").innerHTML;
+
+	socket.emit("join", { name: name, avatarNum: avatarNum, frame:1 });
 }
 
 function sendUpdates(position) {

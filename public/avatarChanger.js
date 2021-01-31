@@ -12,7 +12,8 @@ function changeAvatar(dir){
         avatarNum = avatarNum + 1;
         if (avatarNum==7){
             avatarNum = 1;
-        }
+        }    
     }
+    player.avatarNum = avatarNum;
     document.getElementById("avatar").src = "/Avatars/avatar"+avatarNum+"_1.png";
 }
