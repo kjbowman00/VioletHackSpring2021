@@ -77,7 +77,6 @@ function draw() {
 	let maxTextWidth = player.name.length * 20;
 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 	ctx.fillRect(canvas.width / 2 - 37.5 - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
-	//ctx.fillRect(0, 0, 1000, 1000);
 	ctx.fillStyle = "black";
 	ctx.font = "20px Georgia";
 	ctx.textAlign = "center";
@@ -85,9 +84,30 @@ function draw() {
 
 	for (const element of otherPlayers) {
 		let p = element[1];
-		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width/2-50 - (player.position.x-p.position.x)*scale, canvas.height - 180, 75, 150);
+		maxTextWidth = p.name.length * 20;
+		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x) * scale, canvas.height - 180, 75, 150);
+		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
+		ctx.fillStyle = "black";
+		ctx.font = "20px Georgia";
+		ctx.textAlign = "center";
+		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x) * scale, canvas.height - 200);
+
 		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 180, 75, 150);
+		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
+		ctx.fillStyle = "black";
+		ctx.font = "20px Georgia";
+		ctx.textAlign = "center";
+		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x - backgroundImage.width) * scale, canvas.height - 200);
+
 		ctx.drawImage(playerImages[p.avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 180, 75, 150);
+		ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		ctx.fillRect(canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
+		ctx.fillStyle = "black";
+		ctx.font = "20px Georgia";
+		ctx.textAlign = "center";
+		ctx.fillText(p.name, canvas.width / 2 - (player.position.x - p.position.x + backgroundImage.width) * scale, canvas.height - 200);
 	}
 }
 function gameLoop(timestamp) {
