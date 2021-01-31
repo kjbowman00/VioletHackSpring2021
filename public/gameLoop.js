@@ -24,6 +24,7 @@ function update() {
 
 function draw() {
 	var ctx = canvas.getContext('2d');
+	ctx.imageSmoothingEnabled = false;
 	ctx.drawImage(backgroundImage, player.position.x - canvas.width / 2 / scale, 0, canvas.width / scale, backgroundImage.height,
 		0, 0, canvas.width, canvas.height);
 
