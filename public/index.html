@@ -16,9 +16,11 @@
 
 			<div id="options">
 				<!-- <a href="#" class="previous round">&#8249;</a> -->
-				<a href="#" class="previous">&#8249; </a>
-				<img src="Avatars/boy11.png">
-				<a href="#" class="next"> &#8250;</a>
+				<button onclick="changeAvatar(-1)" href="#" class="previous avatarButton">&#8249; </button>
+				<img src="Avatars/avatar1.png" id="avatar">
+
+
+				<button onclick="changeAvatar(1)" href="#" class="next avatarButton"> &#8250;</button>
 				<!-- <a href="#" class="next round">&#8250;</a> -->
 			</div>
 
@@ -37,5 +39,6 @@
 
 	<script src="/input.js"></script>
 	<script src="/gameLoop.js"></script>
+	<script src="/avatarChanger.js"></script>
 </body>
 </html>
