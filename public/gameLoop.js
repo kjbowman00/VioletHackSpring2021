@@ -10,7 +10,7 @@ var lastUpdateTime = 0;
 var deltaTime = 0;
 var timeSinceLastSendUpdate = 0;
 
-var player = { position: { x: 3, room: 1 }, avatarNum: 1, frame: 1};
+var player = { position: { x: 3, room: 1 }, avatarNum: 1, frame: 1, name:"eee"};
 var backgroundImage = new Image(2705, 200);
 
 var playerImages = [];
@@ -73,7 +73,15 @@ function draw() {
 			canvas.width - (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale) * scale, 0, (player.position.x - (backgroundImage.width - canvas.width / scale) - canvas.width / 2 / scale)*scale,canvas.height );
 	}
 
-	ctx.drawImage(playerImages[avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 50, canvas.height - 180, 75, 150);
+	ctx.drawImage(playerImages[avatarNum - 1][0], 0, 0, 150, 300, canvas.width / 2 - 75, canvas.height - 180, 75, 150);
+	let maxTextWidth = player.name.length * 20;
+	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+	ctx.fillRect(canvas.width / 2 - 37.5 - maxTextWidth / 2, canvas.height - 219, maxTextWidth, 22);
+	//ctx.fillRect(0, 0, 1000, 1000);
+	ctx.fillStyle = "black";
+	ctx.font = "20px Georgia";
+	ctx.textAlign = "center";
+	ctx.fillText(player.name, canvas.width / 2 - 37.5, canvas.height - 200);
 
 	for (const element of otherPlayers) {
 		let p = element[1];
