@@ -34,7 +34,9 @@ socket.on("player_left", (obj) => {
 });
 
 var selfChatMessages = [];
-function sendChat(message) {
+function sendChat() {
+	let message = document.getElementById("chat_entry").value;
+	document.getElementById("chat_entry").value = "";
 	socket.emit("chat_message", message);
 	selfChatMessages.push({ message:message, timeLeft: 5 });
 }
